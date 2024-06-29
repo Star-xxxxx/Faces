@@ -7,7 +7,7 @@
 以下是配置
 */
 var fl = 100; // 表情数量上限，表情黑名单屏蔽的也计入在内
-var ms = 48; // 表情图像的最大高度
+var ms = 48; // 表情图像的最大长或宽
 var dq = "top"; // 为"top"时有表情的聊天行向下拓展，为"bottom"时向上拓展（接近原版效果）
 var fr = "https://star-xxxxx.github.io/faces" // 表情来源，默认为"https://star-xxxxx.github.io/faces"
 var fb = []; // 表情黑名单，具体如下
