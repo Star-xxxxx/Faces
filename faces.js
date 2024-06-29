@@ -1,7 +1,9 @@
 /*
 新表情系统
-版本：Alpha1
+版本：Alpha2
 一些代码是ChatGPT写的
+鼠标悬浮在表情上可看到编号
+应注意，每次加载表情都会获取一次图片，大量表情可能会消耗大量资源
 以下是配置
 */
 var fl = 100; // 表情数量上限，表情黑名单屏蔽的也计入在内
@@ -38,7 +40,6 @@ ChatView.AjaxChat = function () {
                     SendContent = unescape(ar2[1]); //发送内容
                     SendContent = SendContent.replace(/</g, '&lt;');
                     SendContent = SendContent.replace(/>/g, '&gt;');
-
                     /* 代码起始点 */
                     SendContent = SendContent.replace(/(\\\\\d{4})/g, function (m, p) {
                         var number = parseInt(p.substr(2, 4), 10);
@@ -62,7 +63,7 @@ ChatView.AjaxChat = function () {
                         var fallbackSrc = fr + '/' + p.substr(2, 4) + '.gif';
 
                         if (number <= 3273) {
-                            return fn > fl ? m : '<img src="../images/faces/' + p.substr(2, 4) + '.gif" style="max-width: ' + ms + 'px; max-height: ' + ms + 'px; vertical-align: ' + dq + '">';
+                            return fn > fl ? m : '<img src="../images/faces/' + p.substr(2, 4) + '.gif" style="max-width: ' + ms + 'px; max-height: ' + ms + 'px; vertical-align: ' + dq + '" alt= "' + m + '" title="' + m + '">';
                         } else {
                             if (fn > fl) {
                                 return m;
@@ -71,6 +72,8 @@ ChatView.AjaxChat = function () {
                                 imgElement.style.maxWidth = ms + 'px';
                                 imgElement.style.maxHeight = ms + 'px';
                                 imgElement.style.verticalAlign = dq;
+                                imgElement.alt = m;
+                                imgElement.title = m;
 
                                 var processed = false;
 
